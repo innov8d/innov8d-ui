@@ -1,0 +1,3 @@
+Collection of jQuery plugins to provide UX functionality.  Currently includes:
+
+modalify - implements a modal, includes styles for fluid layout and automatic resizing.  Tested on IE7-9, Chrome 15, Safari 5, and FF 4 + 8.
