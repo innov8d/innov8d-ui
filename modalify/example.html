@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+   
+<html>
+	<head>
+		<title>Modalify example</title>
+		<link rel="stylesheet" type="text/css" href="../lib/reset.css" />
+		<link rel="stylesheet" type="text/css" href="modalify.css" />
+	</head>
+		
+	<body>
+        <a href="#" class="modal-open">open modal</a>
+
+        <div class="content two-column">
+        	<div class="fpo-image">FPO</div>
+            <div class="fpo-copy">
+            	<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pellentesque adipiscing metus, congue aliquet quam rutrum a. Sed sed turpis non turpis feugiat posuere at at quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis cursus fringilla porttitor. Vestibulum diam neque, auctor a pellentesque sed, condimentum sed orci. Integer nisi neque, malesuada a ultricies a, consequat at libero. Aenean tellus felis, condimentum eu feugiat sed, gravida quis ligula. Curabitur lacus ligula, tempor sed lacinia nec, suscipit non lacus. Donec suscipit bibendum orci non vestibulum. Suspendisse vehicula lobortis iaculis. Duis vel molestie lacus. In aliquam viverra dui sit amet consequat. Proin auctor ultrices augue sed porta. Nulla facilisi. Aliquam erat volutpat.
+            	</p>      
+			</div> 
+		</div>
+		
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+		<script src="modalify.js"></script>
+		<script>
+			(function() {
+			    $(".content")
+			    	.modalify("init", { onResize: onResize })
+			    	.modalify("set-trigger", ".modal-open");
+			
+			    function onResize(modal, width, height) {
+			        if (width <= 400) {
+			            modal.removeClass("two-column");
+			        } else {
+			            modal.addClass("two-column");
+			        }
+			    }
+			})();
+		</script>
+	</body>
+</html>
