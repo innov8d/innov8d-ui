@@ -44,7 +44,7 @@ body {
     background-color: white;
 }
 
-.outer a {
+.outer .modal-close {
     position: absolute;
     top: -25px;
     right: -25px;
@@ -59,26 +59,4 @@ body {
     padding: 35px;
     zoom: 1;
     display: none;
-}
-
-.fpo-image {
-    height: 200px; 
-    width: 200px; 
-    background-color: yellow; 
-    font-size: 72px; 
-}
-
-.fpo-copy {
-	margin-top: 20px;
-}
-
-.two-column .fpo-image {
-    float:left;
-    margin-right: -200px;
-}
-
-.two-column .fpo-copy {
-    margin-top: 0;
-    float: left;
-    padding-left: 220px;
 }

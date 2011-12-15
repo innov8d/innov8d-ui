@@ -5,6 +5,47 @@
 		<title>Modalify example</title>
 		<link rel="stylesheet" type="text/css" href="../lib/reset.css" />
 		<link rel="stylesheet" type="text/css" href="modalify.css" />
+		
+		<style type="text/css">
+			.fpo-image {
+			    height: 200px; 
+			    width: 200px; 
+			    background-color: yellow; 
+			    font-size: 72px; 
+			}
+			
+			.fpo-copy {
+				margin-top: 20px;
+			}
+			
+			.two-column .fpo-image {
+			    float:left;
+			    margin-right: -200px;
+			}
+			
+			.two-column .fpo-copy {
+			    margin-top: 0;
+			    float: left;
+			    padding-left: 220px;
+			}
+			
+			.fpo-video {
+				height: 250px;
+				width: 300px;
+				background-color: yellow;
+			    font-size: 72px; 
+			    display: none;
+			}
+			
+			.show-video .fpo-image,
+			.show-video .fpo-copy {
+				display:  none;
+			}
+			
+			.show-video .fpo-video {
+				display:  block;
+			}
+		</style>
 	</head>
 		
 	<body>
@@ -51,18 +92,22 @@
         	<div class="fpo-image">FPO</div>
             <div class="fpo-copy">
             	<p>
+            		<a href="#play" class="play-video">Play Video</a>
 					FIRST MODAL Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pellentesque adipiscing metus, congue aliquet quam rutrum a. Sed sed turpis non turpis feugiat posuere at at quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis cursus fringilla porttitor. Vestibulum diam neque, auctor a pellentesque sed, condimentum sed orci. Integer nisi neque, malesuada a ultricies a, consequat at libero. Aenean tellus felis, condimentum eu feugiat sed, gravida quis ligula. Curabitur lacus ligula, tempor sed lacinia nec, suscipit non lacus. Donec suscipit bibendum orci non vestibulum. Suspendisse vehicula lobortis iaculis. Duis vel molestie lacus. In aliquam viverra dui sit amet consequat. Proin auctor ultrices augue sed porta. Nulla facilisi. Aliquam erat volutpat.
             	</p>      
 			</div> 
+			<div class="fpo-video">FPO</div>
 		</div>
 		
 		<div class="content two-column modal2">
         	<div class="fpo-image">FPO</div>
             <div class="fpo-copy">
             	<p>
+            		<a href="#play" class="play-video">Play Video</a>
 					SECOND MODAL Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pellentesque adipiscing metus, congue aliquet quam rutrum a. Sed sed turpis non turpis feugiat posuere at at quam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis cursus fringilla porttitor. Vestibulum diam neque, auctor a pellentesque sed, condimentum sed orci. Integer nisi neque, malesuada a ultricies a, consequat at libero. Aenean tellus felis, condimentum eu feugiat sed, gravida quis ligula. Curabitur lacus ligula, tempor sed lacinia nec, suscipit non lacus. Donec suscipit bibendum orci non vestibulum. Suspendisse vehicula lobortis iaculis. Duis vel molestie lacus. In aliquam viverra dui sit amet consequat. Proin auctor ultrices augue sed porta. Nulla facilisi. Aliquam erat volutpat.
             	</p>      
 			</div> 
+			<div class="fpo-video">FPO</div>
 		</div>
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
@@ -79,7 +124,29 @@
 				});
 				
 			    $(".content")
-			    	.modalify("init", { onResize: onResize });
+			    	.modalify({ onResize: onResize, onClosing: onClosing });
+			    	
+			    $(".play-video").click(onPlayVideoClicked);
+			    
+			    function onPlayVideoClicked(e) {
+			    	e.preventDefault();
+			    	e.stopPropagation();
+			    	
+			    	var $modal = $(e.target).parents(".content");
+			    	
+			    	$modal.addClass("show-video");
+			    	$modal.modalify("center");
+			    }
+			    	
+			    function onClosing(modal) {
+			    	if (modal.hasClass("show-video")) {
+			    		modal.removeClass("show-video");
+			    		modal.modalify("center");
+			    		return false;
+			    	}
+			    	
+			    	return true;
+			    }
 			
 			    function onResize(modal, width, height) {
 			        if (width <= 400) {

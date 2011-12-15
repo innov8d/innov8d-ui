@@ -57,7 +57,9 @@
 	            innerWrapperClass: "inner",
 	            contentPadding: 35,
 	            trigger: null,
-	            onResize: null
+	            onResize: null,
+	            onOpening: null,
+	            onClosing: null
 	        }, options);
 
         if (!_initialized) {
@@ -119,7 +121,7 @@
             at: "center center"
         });
 
-        if (options && options.onResize && ((startHeight != options.$modal.height()) || (startWidth != options.$modal.width()))) {
+        if (options && options.onResize) {
             options.onResize($content, $content.width(), $content.height());
         }
 
@@ -136,6 +138,12 @@
 
         _activeModal = $(this);
         var options = _activeModal.data("modalify");
+        
+        if (options.onOpening && !options.onOpening(_activeModal))
+        {
+        	return;
+        }
+        
         options.$closeLink.click(onMaskClick);
         options.$mask.addClass(options.maskOpenClass);
         options.$modal.addClass(options.modalOpenClass);
@@ -145,6 +153,11 @@
     function close() {
         if (_activeModal) {
             var options = _activeModal.data("modalify");
+            
+            if (options.onClosing && !options.onClosing(_activeModal)) {
+            	return;
+            }
+            
 			options.$closeLink.unbind("click", onMaskClick);
         	options.$mask.removeClass(options.maskOpenClass);
         	options.$modal.removeClass(options.modalOpenClass);
